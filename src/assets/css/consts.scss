@@ -1,0 +1,14 @@
+@import url(http://fonts.googlefonts.net/css?family=Source+Sans+Pro:400,700,400italic|Raleway:500,600,700);
+$white1:#eee;
+$white2:#ccc;
+$white3:#aaa;
+$black1:#111;
+$black2:#333;
+$black3:#555;
+$h_nav:4em;
+$h_navEle:3em;
+@mixin transform ($transforming) {
+    -webkit-transform: $transforming;
+    -moz-transform: $transforming;
+    -transform: $transforming;
+}
