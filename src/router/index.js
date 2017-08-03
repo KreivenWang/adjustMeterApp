@@ -6,13 +6,13 @@ import Login from '@/pages/login';
 import Test from '@/pages/test';
 import AdjustMeter from '@/pages/adjustMeter';
 import UserCenter from '@/pages/userCenter';
+import adjustMeterTop from '@/parts/adjustMeterTop';
 
 Vue.use(Router);
 
 export default new Router({
   // mode: 'history', //手机不支持
   routes: [
-    // { path: '/home', redirect: '/home/index' },
     {
       path: '/home',
       name: 'homeLayout',
@@ -21,17 +21,24 @@ export default new Router({
         {
           path: 'index',
           name: 'home',
-          component: Home
+          components: {
+            default: Home
+          }
         },
         {
           path: 'adjustMeter',
           name: 'adjustMeter',
-          component: AdjustMeter
+          components: {
+            default: AdjustMeter,
+            top: adjustMeterTop
+          }
         },
         {
           path: 'userCenter',
           name: 'userCenter',
-          component: UserCenter
+          components: {
+            default: UserCenter
+          }
         }
       ]
     },

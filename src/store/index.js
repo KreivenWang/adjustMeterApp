@@ -3,7 +3,8 @@ import Vuex from 'vuex';
 // import * as actions from './actions';
 // import * as mutations from './mutations';
 // import * as getters from './getters';
-import commonStatus from './modules/commonStatus';
+import commonState from './modules/commonState';
+import userInfo from './modules/userInfo';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   //   getters,
   //   mutations,
   modules: {
-    commonStatus
+    commonState,
+    userInfo
   }
 });

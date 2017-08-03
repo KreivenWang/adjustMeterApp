@@ -1,17 +1,15 @@
 <template>
   <yd-layout>
-    <div class="header" slot="navbar">
+    <div slot="navbar" class="header">
       <yd-navbar :title="title">
         <router-link to="" slot="left" @click.native="goHistory()" v-show="!isHomeView">
           <yd-navbar-back-icon>{{$l.back}}</yd-navbar-back-icon>
         </router-link>
       </yd-navbar>
     </div>
-  
-    <div class="content">
-      <router-view></router-view>
-    </div>
-  
+    <router-view slot="top" name="top"></router-view>
+    <router-view></router-view>
+    <router-view slot="bottom" name="bottom"></router-view>
     <div slot="tabbar" class="footer">
       <yd-tabbar activeColor="#43aaff">
         <yd-tabbar-item :title="$l.home" link="/" :active="curRouteName==='home'">
@@ -29,7 +27,13 @@
   </yd-layout>
 </template>
 <script>
+import meterFilter from '../components/meterFilter';
+import baiduMap from '../components/baiduMap';
 export default {
+  components: {
+    meterFilter,
+    baiduMap
+  },
   data() {
     return {
       // curView: ''
@@ -45,7 +49,6 @@ export default {
     },
     title() {
       return this.$store.getters.getTitle;
-      // return 'title';
     }
   },
   watch: {

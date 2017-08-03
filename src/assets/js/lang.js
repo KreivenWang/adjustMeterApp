@@ -11,5 +11,4 @@ const languagePack = {
 Vue.prototype.$l = languagePack;
 
 export default {
-  languagePack
 };

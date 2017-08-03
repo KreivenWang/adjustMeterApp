@@ -1,5 +1,13 @@
 <template>
   <div>
+    <yd-rollnotice autoplay="5000" style="font-size:16px;">
+      <yd-rollnotice-item>
+        <span style="color:#F00;">&nbsp;最新动态&nbsp;&nbsp;</span>上海地区5台设备需要校表！</yd-rollnotice-item>
+      <yd-rollnotice-item>
+        <span style="color:#F00;">&nbsp;最新动态&nbsp;&nbsp;</span>今日已完成校表3台。</yd-rollnotice-item>
+      <yd-rollnotice-item>
+        <span style="color:#F00;">&nbsp;最新动态&nbsp;&nbsp;</span>盘锦地区3台设备需要校表！</yd-rollnotice-item>
+    </yd-rollnotice>
     <yd-grids-group :rows="2">
       <yd-grids-item link="/home/adjustMeter">
         <!-- <img slot="icon" src="http://static.ydcss.com/ydui/img/logo.png"> -->

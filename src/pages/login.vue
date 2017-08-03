@@ -1,39 +1,153 @@
 <template>
-  <div class="back">
+  <div class="bg">
+    <img class="bgimg" src="../assets/img/bg1.jpg" width="100%" height="100%" alt="">
+    <div class="title">
+      <img class="brand" src="../assets/img/wspLogo.png">校表应用</div>
     <yd-cell-group class="center">
       <yd-cell-item>
-        <span slot="left">用户名：</span>
-        <yd-input slot="right" required v-model="username" max="20" placeholder="请输入用户名"></yd-input>
+        <span slot="left" class="fix-width">用户名：</span>
+        <yd-input slot="right" required v-model="username" ref="username" max="20" placeholder="请输入用户名"></yd-input>
       </yd-cell-item>
       <yd-cell-item>
-        <span slot="left">密码：</span>
-        <yd-input slot="right" type="password" v-model="password" placeholder="请输入密码"></yd-input>
+        <span slot="left" class="fix-width">密码：</span>
+        <yd-input slot="right" type="password" required v-model="password" ref="password" placeholder="请输入密码"></yd-input>
       </yd-cell-item>
     </yd-cell-group>
+    <yd-accordion>
+      <yd-accordion-item v-my-css="{'padding-right': '6px'}">
+        <span slot="title" v-my-css="{'padding-left': '6px'}" class="fix-width">高级选项</span>
+        <plat-info ref="ref_plat_info" :show-errors="false"></plat-info>
+      </yd-accordion-item>
+    </yd-accordion>
+    <div v-if="showErrorTips" class="error-tips">{{errorTips}}</div>
+    <yd-button-group>
+      <yd-button size="large" bgcolor="#18f" color="#FFF" @click.native="login()">登 录</yd-button>
+    </yd-button-group>
   </div>
 </template>
 <script>
+import platInfo from '../components/platInfo';
 export default {
+  components: {
+    platInfo
+  },
   data() {
     return {
-      x: 'login',
       username: '',
-      password: ''
+      password: '',
+      errorTips: ''
     };
+  },
+  computed: {
+    showErrorTips() {
+      return this.errorTips !== '';
+    }
+  },
+  methods: {
+    login() {
+      if (!this.$refs.ref_plat_info.tryUpdatePlatInfo()) {
+        this.errorTips = this.$refs.ref_plat_info.errorTips;
+        return;
+      }
+
+      let usrCheck = this.$refs.username;
+      let pwdCheck = this.$refs.password;
+      this.errorTips = '';
+      if (!usrCheck.valid) {
+        this.errorTips = '用户名' + usrCheck.errorMsg;
+        return;
+      }
+      if (!pwdCheck.valid) {
+        this.errorTips = '密码' + pwdCheck.errorMsg;
+        return;
+      }
+
+      this.doLogin();
+    },
+    doLogin() {
+      this.$dialog.loading.open('登录中...');
+      setTimeout(() => {
+        this.$http.post(this.$store.getters.getPlatUrl + '/user/dologin', {
+          username: this.username,
+          password: this.password
+        })
+          .then(response => {
+            let loginResult = response.data;
+            this.$dialog.loading.close();
+            if (loginResult.Result === '1000') {
+              this.$router.replace('/');
+            } else {
+              this.$dialog.toast({
+                mes: '登录失败：' + loginResult.Message,
+                timeout: 2000
+              });
+            }
+          })
+          .catch(err => {
+            console.log('post /user/dologin failed: ' + err);
+            this.$dialog.loading.close();
+            this.$dialog.toast({
+              mes: '网络连接错误',
+              timeout: 2000
+            });
+          });
+      }, 1000);
+    }
+  },
+  mounted() {
+    console.log('login mounted');
+    this.username = 'admin';
+    this.password = '654321';
+  },
+  created() {
+    console.log('login created');
   }
 };
 </script>
 
 <style lang='scss' scoped>
-.back {
+@import '../assets/css/errortips.scss';
+
+.bg {
   height: 100%;
   width: 100%;
   position: absolute;
-  background-image: url('../assets/logo.png');
-  background-size: cover;
+}
+
+.bgimg {
+  z-index: -999;
+  position: absolute;
+}
+
+.brand {
+  margin: 0 0 15px -10px;
+}
+
+.title {
+  margin: 3rem 20px 0 0;
+  text-align: right;
+  font-size: 28px;
+  font-family: 'Microsoft YaHei';
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #f3f3f3;
 }
 
 .center {
-  margin: 5rem auto 0 auto;
+  margin: 20px auto 0 auto;
+}
+
+.fix-width {
+  width: 1.5rem;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .25s ease-out;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
