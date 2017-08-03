@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import YDUI from 'vue-ydui';
-import axios from 'axios';
+// import axios from 'axios';
 import router from './router';
 import store from './store';
 import directives from './directives';
@@ -12,7 +12,7 @@ import Layout from './components/layout';
 
 Vue.config.productionTip = false;
 Vue.use(YDUI);
-Vue.prototype.$http = axios;
+// Vue.prototype.$http = axios;
 
 /* eslint-disable no-new */
 new Vue({

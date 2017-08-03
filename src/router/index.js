@@ -3,7 +3,6 @@ import Router from 'vue-router';
 import HomeLayout from '../components/homeLayout.vue';
 import Home from '@/pages/home';
 import Login from '@/pages/login';
-import Test from '@/pages/test';
 import AdjustMeter from '@/pages/adjustMeter';
 import UserCenter from '@/pages/userCenter';
 import adjustMeterTop from '@/parts/adjustMeterTop';
@@ -46,11 +45,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/test',
-      name: 'Test',
-      component: Test
     },
     // { path: '/', redirect: '/test' }
     { path: '/', redirect: '/home/index' }

@@ -12,6 +12,7 @@
   </yd-cell-group>
 </template>
 <script>
+import * as platUrlApi from '../api/platUrl';
 export default {
   props: {
     showErrors: {
@@ -33,6 +34,7 @@ export default {
   },
   watch: {
     platAddress(val, oldVal) {
+      // console.log('new: ' + val + ' old: ' + oldVal);
       setTimeout(() => {
         this.tryUpdatePlatInfo();
       }, 10);
@@ -58,26 +60,14 @@ export default {
       }
       return true;
     },
-    commitPlatInfo() {
-      let platInfo = {
-        address: this.platAddress,
-        port: this.platPort
-      };
-      this.$store.commit('platUrlModification', platInfo);
-      console.log('commitPlatInfo: ' + this.$store.getters.getPlatUrl);
-    },
     loadPlatInfo() {
-      this.platAddress = localStorage.getItem('platAddr');
-      this.platPort = localStorage.getItem('platPort');
-      this.commitPlatInfo();
+      this.platAddress = platUrlApi.getPlatAddress();
+      this.platPort = platUrlApi.getPlatPort();
     },
     updatePlatInfo() {
-      localStorage.setItem('platAddr', this.platAddress);
-      localStorage.setItem('platPort', this.platPort);
-      this.commitPlatInfo();
+      platUrlApi.setPlatUrl(this.platAddress, this.platPort);
     },
     tryUpdatePlatInfo() {
-      console.log('tryUpdatePlatInfo');
       if (!this.validate()) {
         return false;
       }

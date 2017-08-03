@@ -3,25 +3,16 @@
   </router-view>
 </template>
 <script>
+import * as platUrlApi from '../api/platUrl';
 export default {
   methods: {
-    setDefaultLocalStorage() {
-      let key = 'platAddr';
-      if (localStorage.getItem(key) === null) {
-        localStorage.setItem(key, 'qsq.astropulsion.com');
-      }
-      key = 'platPort';
-      if (localStorage.getItem(key) === null) {
-        localStorage.setItem(key, 91);
-      }
-    }
   },
   mounted() {
     console.log('layout mounted');
   },
   created() {
     console.log('layout created');
-    this.setDefaultLocalStorage();
+    platUrlApi.setDefaultUrl();
   }
 };
 </script>

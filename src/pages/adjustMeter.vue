@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import * as meterApi from '../api/meter';
 import meterFilter from '../components/meterFilter';
 import baiduMap from '../components/baiduMap';
 export default {
@@ -39,6 +40,11 @@ export default {
         { img: require('../assets/img/ic_launcher.png'), name: '蒙城测试1', addr: '安徽蒙城测试地址1', code: '00000003001' }
       ]
     };
+  },
+  methods: {
+    getAllMeters() {
+      meterApi.getAllMeters();
+    }
   },
   mounted() {
     if (this.$store.getters.getTitle !== this.$l.adjustMeter) {

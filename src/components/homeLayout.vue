@@ -36,7 +36,6 @@ export default {
   },
   data() {
     return {
-      // curView: ''
     };
   },
   computed: {
@@ -51,11 +50,6 @@ export default {
       return this.$store.getters.getTitle;
     }
   },
-  watch: {
-    // curTab(val, oldVal) {
-    //   console.log('curTab:' + val + ' ' + oldVal);
-    // }
-  },
   methods: {
     clickclick() {
       console.log('div clicked!');
@@ -66,7 +60,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route.name);
+    console.log('homeLayout mounted');
   }
 };
 </script>

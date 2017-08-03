@@ -1,26 +1,22 @@
 const state = {
-  userName: '',
-  platUrl: ''
+  user: ''
 };
 
 const getters = {
-  getUserName(state) {
-    return state.userName;
-  },
-  getPlatUrl(state) {
-    return state.platUrl;
+  getUser(state) {
+    return state.user;
   }
 };
 
 const mutations = { //同步, 执行者
-  platUrlModification(state, platInfo) {
-    state.platUrl = `http://${platInfo.address}:${platInfo.port}`;
+  currentUser(state, user) {
+    state.user = user;
   }
 };
 
 const actions = { //决策者, 异步, 中转
-  modifyPlatUrl(context, platInfo) {
-    context.commit('platUrlModification', platInfo);
+  setCurrentUser(context, user) {
+    context.commit('currentUser', user);
   }
 };
 

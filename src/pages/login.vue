@@ -27,6 +27,7 @@
 </template>
 <script>
 import platInfo from '../components/platInfo';
+import * as userApi from '../api/user';
 export default {
   components: {
     platInfo
@@ -45,7 +46,7 @@ export default {
   },
   methods: {
     login() {
-      if (!this.$refs.ref_plat_info.tryUpdatePlatInfo()) {
+      if (!this.$refs.ref_plat_info.validate()) {
         this.errorTips = this.$refs.ref_plat_info.errorTips;
         return;
       }
@@ -67,14 +68,12 @@ export default {
     doLogin() {
       this.$dialog.loading.open('登录中...');
       setTimeout(() => {
-        this.$http.post(this.$store.getters.getPlatUrl + '/user/dologin', {
-          username: this.username,
-          password: this.password
-        })
-          .then(response => {
-            let loginResult = response.data;
+        userApi.login(this.username, this.password)
+          .then(loginResult => {
             this.$dialog.loading.close();
             if (loginResult.Result === '1000') {
+              userApi.setRememberedUser(this.username);
+              this.$store.commit('currentUser', this.username);
               this.$router.replace('/');
             } else {
               this.$dialog.toast({
@@ -83,20 +82,25 @@ export default {
               });
             }
           })
-          .catch(err => {
-            console.log('post /user/dologin failed: ' + err);
+          .catch(() => {
             this.$dialog.loading.close();
             this.$dialog.toast({
               mes: '网络连接错误',
               timeout: 2000
             });
           });
-      }, 1000);
+      }, 300);
+    },
+    setRememberedUser() {
+      let rememberedUser = userApi.getRememberedUser();
+      if (rememberedUser !== null) {
+        this.username = rememberedUser;
+      }
     }
   },
   mounted() {
     console.log('login mounted');
-    this.username = 'admin';
+    this.setRememberedUser();
     this.password = '654321';
   },
   created() {
