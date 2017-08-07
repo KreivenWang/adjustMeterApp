@@ -3,9 +3,9 @@ import Router from 'vue-router';
 import HomeLayout from '../components/homeLayout.vue';
 import Home from '@/pages/home';
 import Login from '@/pages/login';
-import AdjustMeter from '@/pages/adjustMeter';
+import MeterList from '@/pages/meterList';
 import UserCenter from '@/pages/userCenter';
-import adjustMeterTop from '@/parts/adjustMeterTop';
+import MeterListTop from '@/parts/meterListTop';
 
 Vue.use(Router);
 
@@ -25,11 +25,11 @@ export default new Router({
           }
         },
         {
-          path: 'adjustMeter',
-          name: 'adjustMeter',
+          path: 'meterList',
+          name: 'meterList',
           components: {
-            default: AdjustMeter,
-            top: adjustMeterTop
+            default: MeterList,
+            top: MeterListTop
           }
         },
         {

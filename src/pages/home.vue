@@ -9,7 +9,7 @@
         <span style="color:#F00;">&nbsp;最新动态&nbsp;&nbsp;</span>盘锦地区3台设备需要校表！</yd-rollnotice-item>
     </yd-rollnotice>
     <yd-grids-group :rows="2">
-      <yd-grids-item link="/home/adjustMeter">
+      <yd-grids-item link="/home/meterList">
         <!-- <img slot="icon" src="http://static.ydcss.com/ydui/img/logo.png"> -->
         <yd-icon slot="icon" name="home-outline" color="#43aaff"></yd-icon>
         <span slot="text">{{$l.adjustMeter}}</span>

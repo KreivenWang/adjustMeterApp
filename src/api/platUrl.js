@@ -4,7 +4,10 @@ const defaultPlatAddr = 'qsq.astropulsion.com';
 const defaultPlatPort = '91';
 
 export function setDefaultUrl() {
-  setPlatUrl(defaultPlatAddr, defaultPlatPort);
+  if (getPlatAddress() === null && getPlatPort() === null) {
+    console.log('Reset Default WSP Url');
+    setPlatUrl(defaultPlatAddr, defaultPlatPort);
+  }
 }
 
 export function getPlatUrl() {

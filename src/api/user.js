@@ -12,7 +12,8 @@ export function setRememberedUser(username) {
 }
 
 export function login(username, password) {
-  const url = `${getPlatUrl()}/user/dologin`;
+  const action = '/mobileApp/dologin';
+  const url = `${getPlatUrl()}${action}`;
   const params = Object.assign({}, {
     username,
     password
@@ -22,7 +23,7 @@ export function login(username, password) {
       return Promise.resolve(response.data);
     })
     .catch(err => {
-      console.log('post /user/dologin failed: ' + err);
+      console.log(`post ${action} failed:  ${err}`);
       Promise.reject();
     });
 }

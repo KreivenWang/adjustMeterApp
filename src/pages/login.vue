@@ -73,7 +73,8 @@ export default {
             this.$dialog.loading.close();
             if (loginResult.Result === '1000') {
               userApi.setRememberedUser(this.username);
-              this.$store.commit('currentUser', this.username);
+              this.$store.commit('currentUserName', this.username);
+              this.$store.commit('currentUserId', loginResult.UserId);
               this.$router.replace('/');
             } else {
               this.$dialog.toast({
@@ -91,7 +92,7 @@ export default {
           });
       }, 300);
     },
-    setRememberedUser() {
+    fillUserName() {
       let rememberedUser = userApi.getRememberedUser();
       if (rememberedUser !== null) {
         this.username = rememberedUser;
@@ -100,7 +101,7 @@ export default {
   },
   mounted() {
     console.log('login mounted');
-    this.setRememberedUser();
+    this.fillUserName();
     this.password = '654321';
   },
   created() {

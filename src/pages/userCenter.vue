@@ -2,7 +2,7 @@
   <div>
     <yd-cell-group>
       <yd-cell-item type="label">
-        <span slot="left">{{greet}}！{{currentUser}}。</span>
+        <span slot="left">{{greet}}！{{currentUserName}}。</span>
       </yd-cell-item>
     </yd-cell-group>
     <plat-info ref="ref_plat_info"></plat-info>
@@ -25,8 +25,8 @@ export default {
     };
   },
   computed: {
-    currentUser() {
-      return this.$store.getters.getUser;
+    currentUserName() {
+      return this.$store.getters.getUsername;
     },
     greet() {
       let now = new Date();
@@ -46,6 +46,7 @@ export default {
   methods: {
     logout() {
       console.log('logout clicked');
+      this.$store.commit('currentUserId', -1);
       this.$router.replace('/login');
     }
   },

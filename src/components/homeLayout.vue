@@ -15,7 +15,7 @@
         <yd-tabbar-item :title="$l.home" link="/" :active="curRouteName==='home'">
           <yd-icon name="home" slot="icon" size="0.54rem"></yd-icon>
         </yd-tabbar-item>
-        <yd-tabbar-item :title="$l.adjustMeter" link="/home/adjustMeter" :active="curRouteName==='adjustMeter'">
+        <yd-tabbar-item :title="$l.adjustMeter" link="/home/meterList" :active="curRouteName==='meterList'">
           <yd-icon name="feedback" slot="icon" size="0.54rem"></yd-icon>
         </yd-tabbar-item>
         <yd-tabbar-item :title="$l.userCenter" link="/home/userCenter" :active="curRouteName==='userCenter'">
@@ -61,6 +61,9 @@ export default {
   },
   mounted() {
     console.log('homeLayout mounted');
+    if (this.$store.getters.getUserId === -1) {
+      this.$router.replace('/login');
+    }
   }
 };
 </script>

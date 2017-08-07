@@ -1,22 +1,32 @@
 const state = {
-  user: ''
+  username: '',
+  userId: -1
 };
 
 const getters = {
-  getUser(state) {
-    return state.user;
+  getUsername(state) {
+    return state.username;
+  },
+  getUserId(state) {
+    return state.userId;
   }
 };
 
 const mutations = { //同步, 执行者
-  currentUser(state, user) {
-    state.user = user;
+  currentUserName(state, username) {
+    state.username = username;
+  },
+  currentUserId(state, userId) {
+    state.userId = userId;
   }
 };
 
 const actions = { //决策者, 异步, 中转
-  setCurrentUser(context, user) {
-    context.commit('currentUser', user);
+  setcurrentUserName(context, username) {
+    context.commit('currentUserName', username);
+  },
+  setcurrentUserId(context, userId) {
+    context.commit('currentUserId', userId);
   }
 };
 

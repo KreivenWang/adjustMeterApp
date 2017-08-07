@@ -5,6 +5,7 @@ import Vuex from 'vuex';
 // import * as getters from './getters';
 import commonState from './modules/commonState';
 import userInfo from './modules/userInfo';
+import meterManager from './modules/meterManager';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   //   mutations,
   modules: {
     commonState,
-    userInfo
+    userInfo,
+    meterManager
   }
 });
